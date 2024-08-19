@@ -1,0 +1,5 @@
+# Number of lagging globalsteps needed to trigger a restart.
+lag_recover.globalstep_count (Lagging globalstep count) int 10
+
+# Minimum length of dtime of a globalstep considered lagging.
+lag_recover.lag_threshold (Lagging globalstep length) float 1.0
