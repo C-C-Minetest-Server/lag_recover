@@ -30,7 +30,7 @@ minetest.register_globalstep(function(dtime)
             return
         end
         minetest.chat_send_all(minetest.colorize("yellow",
-            S("This server will restart to recover from the lag. Type \"@1\" if you believe this is a mistake. " ..
+            S("This server may restart to recover from the lag. Type \"@1\" if you believe this is a mistake. " ..
                 "(Step count @2/@3)",
                 "hang on", lag_counter, settings.globalstep_count)))
     else
