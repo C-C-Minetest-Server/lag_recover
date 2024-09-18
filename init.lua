@@ -14,11 +14,15 @@ local lag_counter = 0
 local settings = settings_loader.load_settings("lag_recover.", {
     globalstep_count = {
         stype = "integer",
-        default = 10,
+        default = 40,
     },
     lag_threshold = {
         stype = "float",
-        default = 1.0, -- normal: 0.1 second
+        default = 0.6, -- normal: 0.1 second
+    },
+    globalstep_before_warning = {
+        stype = "integer",
+        default = 25,
     }
 }, true)
 
@@ -27,12 +31,12 @@ minetest.register_globalstep(function(dtime)
         lag_counter = lag_counter + 1
         if lag_counter > settings.globalstep_count then
             minetest.request_shutdown("Recovering from server lag", true, 0)
-            return
+        elseif lag_counter > settings.globalstep_before_warning then
+            minetest.chat_send_all(minetest.colorize("yellow",
+                S("This server may restart to recover from the lag. Type \"@1\" if you believe this is a mistake. " ..
+                    "(Step count @2/@3)",
+                    "hang on", lag_counter, settings.globalstep_count)))
         end
-        minetest.chat_send_all(minetest.colorize("yellow",
-            S("This server may restart to recover from the lag. Type \"@1\" if you believe this is a mistake. " ..
-                "(Step count @2/@3)",
-                "hang on", lag_counter, settings.globalstep_count)))
     else
         if lag_counter ~= 0 then
             minetest.chat_send_all(minetest.colorize("yellow",

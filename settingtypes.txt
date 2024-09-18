@@ -1,5 +1,8 @@
 # Number of lagging globalsteps needed to trigger a restart.
-lag_recover.globalstep_count (Lagging globalstep count) int 10
+lag_recover.globalstep_count (Lagging globalstep count) int 40
 
 # Minimum length of dtime of a globalstep considered lagging.
-lag_recover.lag_threshold (Lagging globalstep length) float 1.0
+lag_recover.lag_threshold (Lagging globalstep length) float 0.6
+
+# Number of lagging globalsteps before messages are shown.
+lag_recover.globalstep_before_warning (Lagging globalstep count before warning) int 25
