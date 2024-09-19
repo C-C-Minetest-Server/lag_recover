@@ -38,7 +38,7 @@ minetest.register_globalstep(function(dtime)
                     "hang on", lag_counter, settings.globalstep_count)))
         end
     else
-        if lag_counter ~= 0 then
+        if lag_counter > settings.globalstep_before_warning then
             minetest.chat_send_all(minetest.colorize("yellow",
                 S("Restart stopped.")))
         end
